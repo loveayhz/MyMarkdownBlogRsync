@@ -24,7 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+        with:
+         ref: ${{ github.head_ref }}
+         fetch-depth: 0
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
@@ -44,10 +46,9 @@ jobs:
           echo test!
       - name: Commit files
         run: |
-          git config --local user.email " non-reply@github.com"
-          git config --local user.name "action"
-          git add .
-          git commit -a -m "sync file"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Add changes"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
