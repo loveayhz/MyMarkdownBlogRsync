@@ -37,13 +37,8 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       - name: Get Markdown content and transfer to markdown file from My blog api
-        env:
-          BLOG_URL: ${{ secrets.BLOG_URL }}
-            #BLOG_ACCESS_KEY: ${{ secret.BLOG_ACCESS_KEY }}
-            #BLOG_SECRET_KEY:${{ secret.BLOG_SECRET_KEY }}
         run: |
-          curl -o today.json /home/runner/work/MyMarkdownBlogRsync/MyMarkdownBlogRsync/$BLOG_URL
-          pwd
+          curl -o /home/runner/work/MyMarkdownBlogRsync/MyMarkdownBlogRsync/today.json ${{ secret.BLOG_URL }}
           echo test!
       - name: Commit files
         run: |
