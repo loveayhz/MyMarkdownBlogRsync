@@ -42,8 +42,7 @@ jobs:
             #BLOG_ACCESS_KEY: ${{ secret.BLOG_ACCESS_KEY }}
             #BLOG_SECRET_KEY:${{ secret.BLOG_SECRET_KEY }}
         run: |
-          curl -o today.json $BLOG_URL
-          ls -l today.json
+          curl -o today.json /home/runner/work/MyMarkdownBlogRsync/MyMarkdownBlogRsync/$BLOG_URL
           pwd
           echo test!
       - name: Commit files
