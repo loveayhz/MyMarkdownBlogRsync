@@ -29,9 +29,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
         with:
-         ref: ${{ github.head_ref }}
+         # ref: ${{ github.head_ref }}
          fetch-depth: 0
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -55,8 +55,8 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          branch: ${{ github.head_ref }}
-          github_token: ${{ secrets.GHTO }}
+          branch: ${{ github.ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: "Send mail"
         uses: dawidd6/action-send-mail@master
         with:
