@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '04 19 * * *'
+    - cron:  '55 12 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
