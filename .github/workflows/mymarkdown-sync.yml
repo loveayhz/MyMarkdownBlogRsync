@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '30 21 * * *'
+    - cron:  '0 3 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,7 +28,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: szenius/set-timezone@v1.0 # 设置执行环境的时区
+      - uses: szenius/set-timezone@v1.2 # 设置执行环境的时区
         with:
           timezoneLinux: "Asia/Shanghai"
           
