@@ -49,7 +49,7 @@ jobs:
           DEST_MINIO_BUCKET: ${{ secrets.DEST_MINIO_BUCKET }}
         run: |
           ./minio-binaries/mc alias set remote $DEST_MINIO_HOST $DEST_MINIO_ACCESS_KEY $DEST_MINIO_SECRET_KEY
-          ./minio-binaries/mc cp --recursive remote/$DEST_MINIO_BUCKET/`date +"%Y%m%d"` ./$DEST_MINIO_BUCKET/`date +"%Y%m%d"` &> today.log
+          ./minio-binaries/mc cp --recursive remote/$DEST_MINIO_BUCKET/`date +"%Y%m%d"` ./$DEST_MINIO_BUCKET/ &> today.log
           echo copy today markdown file to local folder!
       #- name: Get Markdown content and transfer to markdown file from My blog api
       #  run: |
