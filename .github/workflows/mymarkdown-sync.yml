@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '55 12 * * *'
+    - cron:  '30 20 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,18 +37,24 @@ jobs:
          ref: ${{ github.head_ref }}
          fetch-depth: 0
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: chmod mc
+        run: chmod u+x ./minio-binaries/mc
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Cp markdown files to local fileSystem
+        env:
+          DEST_MINIO_HOST: ${{ secrets.DEST_MINIO_HOST }}
+          DEST_MINIO_ACCESS_KEY: ${{ secrets.DEST_MINIO_ACCESS_KEY }}
+          DEST_MINIO_SECRET_KEY: ${{ secrets.DEST_MINIO_SECRET_KEY }}
+          DEST_MINIO_BUCKET: ${{ secrets.DEST_MINIO_BUCKET }}
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-      - name: Get Markdown content and transfer to markdown file from My blog api
-        run: |
-          curl -o /home/runner/work/MyMarkdownBlogRsync/MyMarkdownBlogRsync/today.json ${{ secrets.BLOG_URL }}
-          echo test!
+          ./minio-binaries/mc alias set remote $DEST_MINIO_HOST $DEST_MINIO_ACCESS_KEY $DEST_MINIO_SECRET_KEY
+          ./minio-binaries/mc cp --recursive remote/$DEST_MINIO_BUCKET/`date +"%Y%m%d"` ./$DEST_MINIO_BUCKET/`date +"%Y%m%d"` --quiet
+          eco copy today markdown file to local folder!
+      #- name: Get Markdown content and transfer to markdown file from My blog api
+      #  run: |
+      #    curl -o /home/runner/work/MyMarkdownBlogRsync/MyMarkdownBlogRsync/today.json ${{ secrets.BLOG_URL }}
+      #    echo test!
       - name: Commit files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
