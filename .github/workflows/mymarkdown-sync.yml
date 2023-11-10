@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '30 20 * * *'
+    - cron:  '30 21 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -49,8 +49,8 @@ jobs:
           DEST_MINIO_BUCKET: ${{ secrets.DEST_MINIO_BUCKET }}
         run: |
           ./minio-binaries/mc alias set remote $DEST_MINIO_HOST $DEST_MINIO_ACCESS_KEY $DEST_MINIO_SECRET_KEY
-          ./minio-binaries/mc cp --recursive remote/$DEST_MINIO_BUCKET/`date +"%Y%m%d"` ./$DEST_MINIO_BUCKET/`date +"%Y%m%d"` --quiet
-          eco copy today markdown file to local folder!
+          ./minio-binaries/mc cp --recursive remote/$DEST_MINIO_BUCKET/`date +"%Y%m%d"` ./$DEST_MINIO_BUCKET/`date +"%Y%m%d"` &> today.log
+          echo copy today markdown file to local folder!
       #- name: Get Markdown content and transfer to markdown file from My blog api
       #  run: |
       #    curl -o /home/runner/work/MyMarkdownBlogRsync/MyMarkdownBlogRsync/today.json ${{ secrets.BLOG_URL }}
@@ -74,7 +74,7 @@ jobs:
           username: ${{ secrets.MAILUSERNAME }}
           password: ${{ secrets.MAILPASSWORD }}
           subject: BLOG sync success
-          body: file://today.json
+          body: file://today.log
           to: ${{ secrets.NOTICFICATION_EMAIL }}
           from: GitHub Actions
 
