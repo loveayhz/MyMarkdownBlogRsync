@@ -5,14 +5,11 @@ name: CI
 
 # Set the access for individual scopes, or use permissions: write-all
 permissions: write-all
-  #pull-requests: write
-  #issues: write
-  #repository-projects: write
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main","workflow" ]
+    branches: [ "main" ]
   #pull_request:
     # branches: [ "main" ]
 
@@ -51,10 +48,6 @@ jobs:
           ./minio-binaries/mc alias set remote $DEST_MINIO_HOST $DEST_MINIO_ACCESS_KEY $DEST_MINIO_SECRET_KEY
           ./minio-binaries/mc cp --recursive remote/$DEST_MINIO_BUCKET/`date +"%Y%m%d"` ./$DEST_MINIO_BUCKET/ &> today.log
           echo copy today markdown file to local folder!
-      #- name: Get Markdown content and transfer to markdown file from My blog api
-      #  run: |
-      #    curl -o /home/runner/work/MyMarkdownBlogRsync/MyMarkdownBlogRsync/today.json ${{ secrets.BLOG_URL }}
-      #    echo test!
       - name: Commit files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
