@@ -50,9 +50,9 @@ jobs:
           DEST_MINIO_BUCKET: ${{ secrets.DEST_MINIO_BUCKET }}
         run: |
           ./minio-binaries/mc alias set remote $DEST_MINIO_HOST $DEST_MINIO_ACCESS_KEY $DEST_MINIO_SECRET_KEY
-          echo `date -d`
+          echo "当前时间：`date`"
           ./minio-binaries/mc cp --recursive remote/$DEST_MINIO_BUCKET/`date -d "-1 day" +"%Y%m%d"` ./$DEST_MINIO_BUCKET/ &> today.log
-          echo "\n当前时间：`date -d`" >> today.log
+          echo "当前时间：`date`" >> today.log
           echo copy today markdown file to local folder!
       - name: Commit files
         run: |
