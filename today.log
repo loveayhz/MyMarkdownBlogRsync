@@ -1,6 +1,2 @@
-`remote/markdown/20231207/再次测试.md` -> `markdown/20231207/再次测试.md`
-`remote/markdown/20231207/数据库从mysql5.7迁移到mysql8后BLOB字段对应的String乱码.md` -> `markdown/20231207/数据库从mysql5.7迁移到mysql8后BLOB字段对应的String乱码.md`
-`remote/markdown/20231207/测试.md` -> `markdown/20231207/测试.md`
-`remote/markdown/20231207/登录/api/login被拦截了.md` -> `markdown/20231207/登录/api/login被拦截了.md`
-Total: 8.33 KiB, Transferred: 8.33 KiB, Speed: 5.11 KiB/s
-当前时间：Fri Dec  8 11:07:04 CST 2023
+mc: <ERROR> Unable to prepare URL for copying. Unable to guess the type of copy operation.
+当前时间：Sat Dec  9 11:06:39 CST 2023
